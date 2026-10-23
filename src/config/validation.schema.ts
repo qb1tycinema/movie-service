@@ -12,6 +12,13 @@ export default z.object({
 	GRPC_HOST: z.string().nonempty(),
 	GRPC_PORT: z.coerce.number(),
 
+	DATABASE_URL: z.string().nonempty(),
+	DATABASE_USER: z.string().nonempty(),
+	DATABASE_PASSWORD: z.string().nonempty(),
+	DATABASE_HOST: z.string().nonempty(),
+	DATABASE_PORT: z.coerce.number(),
+	DATABASE_NAME: z.string().nonempty(),
+
 	REDIS_USER: z.string().nonempty(),
 	REDIS_PASSWORD: z.string().nonempty(),
 	REDIS_HOST: z.string().nonempty(),
