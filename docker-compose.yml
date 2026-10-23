@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  movie-service:
+    container_name: movie-service
+    image: qb1tycinema/movie-service:dev
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    env_file:
+      - .env.production.local
+    expose:
+      - "9105"
+    volumes:
+      - ../docker/logs/movie:/var/log/services/movie
+    networks:
+      - qb1tycinema
+
+networks:
+  qb1tycinema:
+    external: true
