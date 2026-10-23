@@ -18,6 +18,14 @@ export default () => {
 			host: env.GRPC_HOST,
 			port: env.GRPC_PORT
 		},
+		database: {
+			url: env.DATABASE_URL,
+			user: env.DATABASE_USER,
+			password: env.DATABASE_PASSWORD,
+			host: env.DATABASE_HOST,
+			port: env.DATABASE_PORT,
+			name: env.DATABASE_NAME
+		},
 		redis: {
 			user: env.REDIS_USER,
 			password: env.REDIS_PASSWORD,
