@@ -4,6 +4,7 @@ import { LoggerModule } from "nestjs-pino"
 
 import { configuration } from "./config"
 import { getPinoConfig } from "./config/factories"
+import { PrismaModule } from "./infrastructure/prisma/prisma.module"
 import { RedisModule } from "./infrastructure/redis/redis.module"
 
 @Module({
@@ -22,6 +23,7 @@ import { RedisModule } from "./infrastructure/redis/redis.module"
 			useFactory: getPinoConfig,
 			inject: [ConfigService]
 		}),
+		PrismaModule,
 		RedisModule
 	]
 })
