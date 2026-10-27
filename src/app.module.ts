@@ -6,6 +6,8 @@ import { configuration } from "./config"
 import { getPinoConfig } from "./config/factories"
 import { PrismaModule } from "./infrastructure/prisma/prisma.module"
 import { RedisModule } from "./infrastructure/redis/redis.module"
+import { CategoriesModule } from "./modules/categories/categories.module"
+import { MoviesModule } from "./modules/movies/movies.module"
 
 @Module({
 	imports: [
@@ -24,7 +26,9 @@ import { RedisModule } from "./infrastructure/redis/redis.module"
 			inject: [ConfigService]
 		}),
 		PrismaModule,
-		RedisModule
+		RedisModule,
+		MoviesModule,
+		CategoriesModule
 	]
 })
 export class AppModule {}
