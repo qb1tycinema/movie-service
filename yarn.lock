@@ -2161,10 +2161,10 @@
   resolved "https://registry.yarnpkg.com/@qb1tycinema/common/-/common-1.3.1.tgz#f419b85935eed6762fc23d120e242b0c217c7501"
   integrity sha512-RINnAvRZ4MGyPjC+1TeLjFyyqXV6S1/t5MF3tWcTL51euDTbRWjxKwdnJW51QEem/55sHfJkhmTEWp+MRPWy6A==
 
-"@qb1tycinema/contracts@^1.4.0":
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/@qb1tycinema/contracts/-/contracts-1.4.0.tgz#6f94e253d574af41bd7773e3ed483013c6d61f62"
-  integrity sha512-lTb1+Acz+h1LCTLbYMOIOHWwPw+eBRsBBtSZNvmBeA92v7pkIAMzYyr7hyCQfKRb8WTNcAoeuNt/4yz+OxdfaA==
+"@qb1tycinema/contracts@^1.4.3":
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/@qb1tycinema/contracts/-/contracts-1.4.3.tgz#50b2a2f1adb0021b4def36b73728153cc6c15ac5"
+  integrity sha512-HFMhc4dIgGIroQrfd/VvJIx8XdaT3gpZLRTvVctPBrW9YnfumLj2NdvvtYe0VMPQM0z9W9u+OjWEHjiAHqiOOw==
 
 "@qb1tycinema/core@^1.0.4":
   version "1.0.4"
