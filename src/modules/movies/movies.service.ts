@@ -2,12 +2,13 @@ import { Injectable } from "@nestjs/common"
 import { RpcException } from "@nestjs/microservices"
 import { RpcStatus } from "@qb1tycinema/common"
 import type {
+	CreateMovieRequest,
 	GetMovieRequest,
 	ListMoviesRequest
 } from "@qb1tycinema/contracts/gen/movie"
 
-import { MoviesRepository } from "./movies.repository"
 import { MovieMapper } from "./movie.mapper"
+import { MoviesRepository } from "./movies.repository"
 
 @Injectable()
 export class MoviesService {
@@ -45,7 +46,15 @@ export class MoviesService {
 		}
 
 		return {
-			movie: MovieMapper.toMovie(movie)
+			movie: MovieMapper.toMovieDetails(movie)
+		}
+	}
+
+	public async create(data: CreateMovieRequest) {
+		const movie = await this.moviesRepository.create(data)
+
+		return {
+			movie: MovieMapper.toMovieDetails(movie)
 		}
 	}
 }
