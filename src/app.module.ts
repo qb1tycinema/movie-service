@@ -8,6 +8,7 @@ import { PrismaModule } from "./infrastructure/prisma/prisma.module"
 import { RedisModule } from "./infrastructure/redis/redis.module"
 import { CategoriesModule } from "./modules/categories/categories.module"
 import { MoviesModule } from "./modules/movies/movies.module"
+import { ObservabilityModule } from "./observability/observability.module"
 
 @Module({
 	imports: [
@@ -25,6 +26,7 @@ import { MoviesModule } from "./modules/movies/movies.module"
 			useFactory: getPinoConfig,
 			inject: [ConfigService]
 		}),
+		ObservabilityModule,
 		PrismaModule,
 		RedisModule,
 		MoviesModule,
