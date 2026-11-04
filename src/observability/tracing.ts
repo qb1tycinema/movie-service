@@ -17,7 +17,7 @@ const traceExporter = new OTLPTraceExporter({
 export const otelSdk = new NodeSDK({
 	traceExporter,
 	resource: resourceFromAttributes({
-		[ATTR_SERVICE_NAME]: "auth-service"
+		[ATTR_SERVICE_NAME]: "movie-service"
 	}),
 	instrumentations: [
 		getNodeAutoInstrumentations({
