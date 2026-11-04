@@ -32,7 +32,7 @@ model Movies {
     banner String?
     duration Int @default(0)
     releaseYear Int @map("release_year")
-    releaseDate DateTime @map("release_date")
+    releaseDate DateTime? @map("release_date")
     ratingAge Int @default(0) @map("rating_age")
     country String[] @db.VarChar(255)
 
