@@ -1,6 +1,10 @@
 import { Injectable } from "@nestjs/common"
 import { Movies, Prisma } from "@orm/generated/client"
-import type { ListMoviesRequest } from "@qb1tycinema/contracts/gen/movie"
+import type { Timestamp } from "@qb1tycinema/contracts/gen/google/protobuf/timestamp"
+import type {
+	CreateMovieRequest,
+	ListMoviesRequest
+} from "@qb1tycinema/contracts/gen/movie"
 
 import {
 	AGE_MAPPER,
@@ -25,6 +29,9 @@ export class MoviesRepository {
 		const where = this.buildWhere(filter)
 		const orderBy = this.buildOrder(filter)
 		const take = filter.limit && filter.limit > 0 ? filter.limit : undefined
+
+		// console.log("--> 1. ПРИШЛА КАТЕГОРИЯ С ШЛЮЗА:", filter.category)
+		// console.log("--> 2. SQL УСЛОВИЕ (WHERE):", JSON.stringify(where, null, 2))
 
 		return this.prisma.movies.findMany({
 			select: {
@@ -57,6 +64,26 @@ export class MoviesRepository {
 	public async findById(id: string) {
 		return this.prisma.movies.findUnique({
 			where: { id }
+		})
+	}
+
+	public async create(data: CreateMovieRequest) {
+		const releaseDate = this.parsedTimestampToDate(data.releaseDate)
+
+		return this.prisma.movies.create({
+			data: {
+				title: data.title,
+				slug: data.slug,
+				description: data.description,
+				poster: data.poster,
+				banner: data.banner ?? null,
+				duration: data.duration,
+				releaseYear: data.releaseYear,
+				releaseDate: releaseDate,
+				ratingAge: data.ratingAge,
+				country: data.country,
+				categoryId: data.categoryId
+			}
 		})
 	}
 
@@ -100,5 +127,14 @@ export class MoviesRepository {
 		const orderBy = SORT_BY_MAPPER(direction)[filter.sortBy]
 
 		return orderBy ?? { releaseDate: direction }
+	}
+
+	private parsedTimestampToDate(date: Timestamp) {
+		return date
+			? new Date(
+					Number(date.seconds) * 1000 +
+						Math.floor(date.nanos / 1_000_000)
+				)
+			: null
 	}
 }
