@@ -1,8 +1,15 @@
 import { Controller } from "@nestjs/common"
+import { GrpcMethod } from "@nestjs/microservices"
+import type {
+	CreateMovieRequest,
+	CreateMovieResponse,
+	GetMovieRequest,
+	GetMovieResponse,
+	ListMoviesRequest,
+	ListMoviesResponse
+} from "@qb1tycinema/contracts/gen/movie"
 
 import { MoviesService } from "./movies.service"
-import { GrpcMethod } from "@nestjs/microservices"
-import type { GetMovieRequest, GetMovieResponse, ListMoviesRequest, ListMoviesResponse } from "@qb1tycinema/contracts/gen/movie"
 
 @Controller()
 export class MoviesController {
@@ -16,5 +23,12 @@ export class MoviesController {
 	@GrpcMethod("MovieService", "GetMovie")
 	public async getOne(data: GetMovieRequest): Promise<GetMovieResponse> {
 		return await this.moviesService.getOne(data)
+	}
+
+	@GrpcMethod("MovieService", "CreateMovie")
+	public async createMovie(
+		data: CreateMovieRequest
+	): Promise<CreateMovieResponse> {
+		return await this.moviesService.create(data)
 	}
 }
