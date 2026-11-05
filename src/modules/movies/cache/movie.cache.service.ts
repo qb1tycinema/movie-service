@@ -25,8 +25,6 @@ export class MovieCacheService {
 	}
 
 	public getAll<T = unknown>(params: ListMoviesRequest): Promise<T | null> {
-        console.log(MOVIE_CACHE_KEYS.all(params))
-
 		return this.get(MOVIE_CACHE_KEYS.all(params))
 	}
 
