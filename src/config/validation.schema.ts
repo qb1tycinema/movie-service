@@ -23,6 +23,9 @@ export default z.object({
 	REDIS_PASSWORD: z.string().nonempty(),
 	REDIS_HOST: z.string().nonempty(),
 	REDIS_PORT: z.coerce.number(),
+	REDIS_DB: z.coerce.number(),
+
+	CACHE_TTL: z.coerce.number(),
 
 	JAEGER_URL: z.string().nonempty(),
 
