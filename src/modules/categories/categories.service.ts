@@ -1,16 +1,29 @@
 import { Injectable } from "@nestjs/common"
-import type { CreateCategoryRequest } from "@qb1tycinema/contracts/gen/category"
+import type {
+	Category,
+	CreateCategoryRequest
+} from "@qb1tycinema/contracts/gen/category"
 
+import { CategoriesCacheService } from "./cache/categories.cache.service"
 import { CategoriesRepository } from "./categories.repository"
 
 @Injectable()
 export class CategoriesService {
 	public constructor(
-		private readonly categoryRepository: CategoriesRepository
+		private readonly categoryRepository: CategoriesRepository,
+		private readonly cacheService: CategoriesCacheService
 	) {}
 
 	public async getAll() {
-		const categories = await this.categoryRepository.findAll()
+		const cached = await this.cacheService.getAll<Category[]>()
+
+		if (cached) {
+			return {
+				categories: cached
+			}
+		}
+
+		const categories: Category[] = await this.categoryRepository.findAll()
 
 		return { categories }
 	}
