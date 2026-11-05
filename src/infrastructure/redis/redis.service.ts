@@ -20,8 +20,8 @@ export class RedisService
 			password: configService.get("redis.password"),
 			host: configService.get("redis.host"),
 			port: configService.get("redis.port"),
-			maxRetriesPerRequest: 5,
-			enableOfflineQueue: true
+			db: parseInt(configService.get("redis.db")),
+			lazyConnect: true
 		})
 	}
 
@@ -63,6 +63,22 @@ export class RedisService
 			this.logger.log("Redis connection closed")
 		} catch (error) {
 			this.logger.error("Error closing redis connection: ", error)
+		}
+	}
+
+	public async getJson<T>(key: string): Promise<T | null> {
+		const value = await this.get(key)
+
+		return value ? JSON.parse(value) : null
+	}
+
+	public async setJson(key: string, value: unknown, ttl?: number) {
+		const payload = JSON.stringify(value)
+
+		if (ttl) {
+			await this.set(key, payload, "EX", ttl)
+		} else {
+			await this.set(key, payload)
 		}
 	}
 }
