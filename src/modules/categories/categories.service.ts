@@ -25,6 +25,8 @@ export class CategoriesService {
 
 		const categories: Category[] = await this.categoryRepository.findAll()
 
+		await this.cacheService.setAll(categories)
+
 		return { categories }
 	}
 
